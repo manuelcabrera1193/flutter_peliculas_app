@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:peliculas_app/providers/movies_provider.dart';
-import 'package:peliculas_app/router/app_routes.dart';
-import 'package:peliculas_app/theme/app_theme.dart';
-import 'package:provider/provider.dart';
-
+import 'package:get/get.dart';
+import 'package:peliculas_app/presentation/helpers/main_bindings.dart';
+import 'package:peliculas_app/presentation/helpers/pages_app.dart';
+import 'package:peliculas_app/presentation/helpers/routes_app.dart';
+import 'package:peliculas_app/presentation/router/app_routes.dart';
+import 'package:peliculas_app/presentation/theme/app_theme.dart';
 void main() => runApp(const AppState());
 
 class AppState extends StatelessWidget {
@@ -11,15 +12,22 @@ class AppState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (context) => MoviesProvider(),
-          lazy: false,
-        ),
-      ],
-      child: MyApp(),
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Material App',
+      initialRoute: RoutesApp.home,
+      getPages: PagesApp.screens,
+      initialBinding: MainBindings(),
     );
+    // MultiProvider(
+    //   providers: [
+    //     ChangeNotifierProvider(
+    //       create: (context) => MoviesProvider(),
+    //       lazy: false,
+    //     ),
+    //   ],
+    //   child: MyApp(),
+    // );
   }
 }
 
